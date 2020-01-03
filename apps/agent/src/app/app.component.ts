@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Message } from '@happyorg/api-interfaces';
 
 @Component({
   selector: 'happyorg-root',

@@ -33,7 +33,7 @@
       "implicitDependencies": ["agent"]
     },
     "agent": {
-      "tags": [],
+      "tags": ["scope:agent"],
       "implicitDependencies": []
     }
   }
