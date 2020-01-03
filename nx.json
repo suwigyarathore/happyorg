@@ -9,16 +9,32 @@
   },
   "projects": {
     "tickets": {
-      "tags": []
+      "tags": ["scope:tickets"],
+      "implicitDependencies": []
     },
     "tickets-e2e": {
-      "tags": []
+      "tags": ["scope:tickets"],
+      "implicitDependencies": ["tickets"]
     },
     "api": {
-      "tags": []
+      "tags": ["scope:api"],
+      "implicitDependencies": []
     },
     "api-interfaces": {
-      "tags": []
+      "tags": ["scope:api-interfaces"],
+      "implicitDependencies": []
+    },
+    "ticket-list": {
+      "tags": ["scope:ticket-list"],
+      "implicitDependencies": []
+    },
+    "agent-e2e": {
+      "tags": ["scope:agent"],
+      "implicitDependencies": ["agent"]
+    },
+    "agent": {
+      "tags": [],
+      "implicitDependencies": []
     }
   }
 }

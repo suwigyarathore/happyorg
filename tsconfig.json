@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@happyorg/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@happyorg/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@happyorg/ticket-list": ["libs/ticket-list/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

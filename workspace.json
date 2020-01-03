@@ -192,6 +192,153 @@
           }
         }
       }
+    },
+    "ticket-list": {
+      "root": "libs/ticket-list",
+      "sourceRoot": "libs/ticket-list/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/ticket-list/.eslintrc",
+            "tsConfig": [
+              "libs/ticket-list/tsconfig.lib.json",
+              "libs/ticket-list/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ticket-list/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ticket-list/jest.config.js",
+            "tsConfig": "libs/ticket-list/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "agent": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/agent",
+      "sourceRoot": "apps/agent/src",
+      "prefix": "happyorg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/agent",
+            "index": "apps/agent/src/index.html",
+            "main": "apps/agent/src/main.ts",
+            "polyfills": "apps/agent/src/polyfills.ts",
+            "tsConfig": "apps/agent/tsconfig.app.json",
+            "aot": false,
+            "assets": ["apps/agent/src/favicon.ico", "apps/agent/src/assets"],
+            "styles": ["apps/agent/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/agent/src/environments/environment.ts",
+                  "with": "apps/agent/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "agent:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "agent:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "agent:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/agent/tsconfig.app.json",
+              "apps/agent/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/agent/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/agent/jest.config.js",
+            "tsConfig": "apps/agent/tsconfig.spec.json",
+            "setupFile": "apps/agent/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "agent-e2e": {
+      "root": "apps/agent-e2e",
+      "sourceRoot": "apps/agent-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/agent-e2e/cypress.json",
+            "tsConfig": "apps/agent-e2e/tsconfig.e2e.json",
+            "devServerTarget": "agent:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "agent:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/agent-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/agent-e2e/**"]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -246,6 +393,13 @@
       "application": {
         "linter": "eslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     }
   },
   "defaultProject": "tickets"

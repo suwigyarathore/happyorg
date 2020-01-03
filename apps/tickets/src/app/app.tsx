@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { TicketList } from '@happyorg/ticket-list';
 import { Message } from '@happyorg/api-interfaces';
 
 export const App = () => {
@@ -20,6 +21,7 @@ export const App = () => {
         />
       </div>
       <div>{m.message}</div>
+      <TicketList></TicketList>
     </>
   );
 };
